@@ -54,7 +54,7 @@ namespace MultipleFileUpload.Controllers
                         };
                         fileDetails.Add(fileDetail);
 
-                        var path = Path.Combine(Server.MapPath("~/App_Data/Upload/"), fileDetail.Id + fileDetail.Extension);
+                        var path = Path.Combine(Server.MapPath("~/Images/"), fileDetail.Id + fileDetail.Extension);
                         file.SaveAs(path);
                     }
                 }
@@ -88,7 +88,7 @@ namespace MultipleFileUpload.Controllers
 
         public FileResult Download(String p, String d)
         {
-            return File(Path.Combine(Server.MapPath("~/App_Data/Upload/"), p), System.Net.Mime.MediaTypeNames.Application.Octet, d);
+            return File(Path.Combine(Server.MapPath("~/Images/"), p), System.Net.Mime.MediaTypeNames.Application.Octet, d);
         }
 
 
@@ -118,7 +118,7 @@ namespace MultipleFileUpload.Controllers
                             Id = Guid.NewGuid(),
                             SupportId = support.SupportId
                         };
-                        var path = Path.Combine(Server.MapPath("~/App_Data/Upload/"), fileDetail.Id + fileDetail.Extension);
+                        var path = Path.Combine(Server.MapPath("~/Images/"), fileDetail.Id + fileDetail.Extension);
                         file.SaveAs(path);
 
                         db.Entry(fileDetail).State = EntityState.Added;
@@ -157,7 +157,7 @@ namespace MultipleFileUpload.Controllers
                 db.SaveChanges();
 
                 //Delete file from the file system
-                var path = Path.Combine(Server.MapPath("~/App_Data/Upload/"), fileDetail.Id + fileDetail.Extension);
+                var path = Path.Combine(Server.MapPath("~/Images/"), fileDetail.Id + fileDetail.Extension);
                 if (System.IO.File.Exists(path))
                 {
                     System.IO.File.Delete(path);
@@ -192,7 +192,7 @@ namespace MultipleFileUpload.Controllers
                 //delete files from the file system
 
                 foreach (var item in support.FileDetails){
-                    String path = Path.Combine(Server.MapPath("~/App_Data/Upload/"), item.Id + item.Extension);
+                    String path = Path.Combine(Server.MapPath("~/Images/"), item.Id + item.Extension);
                     if (System.IO.File.Exists(path))
                     {
                         System.IO.File.Delete(path);
